@@ -4,7 +4,7 @@ const GalleryContext = React.createContext()
 
 function GalleryContextProvider({children}) {
 
-    const [ galleryData, setGalleryData ] = useState({})
+    const [ galleryData, setGalleryData ] = useState([])
     const galleryAPI = `https://mysterious-dawn-90465.herokuapp.com/gallery`
 
     useEffect(() => {
@@ -14,10 +14,8 @@ function GalleryContextProvider({children}) {
             .catch(err => console.error(err))
     }, [])
 
-    console.log(galleryData)
-
     return (
-        <GalleryContext.Provider value={galleryData}>
+        <GalleryContext.Provider value={{galleryData}}>
             {children}
         </GalleryContext.Provider>
     )
