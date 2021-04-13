@@ -15,7 +15,7 @@ function GalleryContextProvider({children}) {
                 setGalleryPrice(resJson)
             })
             .catch(err => console.error(err))
-    }, [])
+    }, [galleryAPI])
 
     // set prices
     function setGalleryPrice(data) {
@@ -50,7 +50,14 @@ function GalleryContextProvider({children}) {
     }
 
     return (
-        <GalleryContext.Provider value={{galleryData, toggleFavorite, cartItems, addToCart, removeFromCart}}>
+        <GalleryContext.Provider value={{
+            galleryData,
+            toggleFavorite,
+            cartItems,
+            setCartItems,
+            addToCart,
+            removeFromCart
+        }}>
             {children}
         </GalleryContext.Provider>
     )

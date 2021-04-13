@@ -1,12 +1,19 @@
 import React, { useContext } from 'react'
 import { GalleryContext } from './GalleryContext'
+import useHover from '../hooks/useHover'
 
 function CartItem({ item, cartIndex }) {
+    const [ hovered, ref ] = useHover()
     const { removeFromCart } = useContext(GalleryContext)
 
-    const binIcon = <i className="ri-delete-bin-line bin" onClick={() => removeFromCart(item)}></i>
     const priceNum = item.price.toLocaleString("en-US", {style: "currency", currency: "USD"})
-
+    
+    const binIcon = <i
+        className={`ri-delete-bin-${hovered ? 'fill' : 'line'} bin`}
+        onClick={() => removeFromCart(item)}
+        ref={ref}
+    ></i>
+    
     return (
         <div className="cart-item">
             <p>{cartIndex}</p>
