@@ -5,14 +5,14 @@ import useHover from '../hooks/useHover'
 
 function Image({ data }) {
     const [ hovered, ref ] = useHover()
-    // const [ isHovered, setIsHovered ] = useState(false)
-    const { toggleFavorite, cartItems, addToCart, removeFromCart } = useContext(GalleryContext)
+    const { favoritesItems, addToFavorites, removeFromFavorites, cartItems, addToCart, removeFromCart } = useContext(GalleryContext)
 
     function heartIcon() {
-        if (data.isFavorite) {
-            return <i className="ri-heart-2-fill heart" onClick={() => toggleFavorite(data.id)}></i>
+        const isInFavorites = favoritesItems.some(item => item.id === data.id)
+        if (isInFavorites) {
+            return <i className="ri-heart-2-fill heart" onClick={() => removeFromFavorites(data)}></i>
         } else if (hovered) {
-            return <i className="ri-heart-2-line heart" onClick={() => toggleFavorite(data.id)}></i>
+            return <i className="ri-heart-2-line heart" onClick={() => addToFavorites(data)}></i>
         }
     }
 

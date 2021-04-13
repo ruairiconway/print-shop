@@ -30,29 +30,26 @@ function GalleryContextProvider({children}) {
         setCartItems(prevImageData => [...prevImageData, imageData])
     }
     function removeFromCart(imageData) {
-        const currentGallery = cartItems.filter(cartItem => cartItem.id !== imageData.id)
-        setCartItems(currentGallery)
+        const currentCart = cartItems.filter(cartItem => cartItem.id !== imageData.id)
+        setCartItems(currentCart)
     }
 
     // toggle favorite
-    function toggleFavorite(id) {
-        const updatedGallery = galleryData.map(image => {
-            if (image.id === id) {
-                return {
-                    ...image,
-                    isFavorite: !image.isFavorite,
-                }
-            } else {
-                return image
-            }
-        })
-        setGalleryData(updatedGallery)
+    const [ favoritesItems, setFavoritesItems ] = useState([])
+    function addToFavorites(imageData) {
+        setFavoritesItems(prevImageData => [...prevImageData, imageData])
+    }
+    function removeFromFavorites(imageData) {
+        const currentFavorites = favoritesItems.filter(favoritesItem => favoritesItem.id !== imageData.id)
+        setFavoritesItems(currentFavorites)
     }
 
     return (
         <GalleryContext.Provider value={{
             galleryData,
-            toggleFavorite,
+            favoritesItems,
+            addToFavorites,
+            removeFromFavorites,
             cartItems,
             setCartItems,
             addToCart,
